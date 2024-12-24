@@ -1,73 +1,37 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-## [1.0.0] - 2024-01-14
+## [Unreleased]
 
 ### Added
-- Initial project setup with Next.js 14, TypeScript, and Tailwind CSS
-- Layout components:
-  - Header with navigation and cart icon
-  - Footer with site links
-  - Mobile menu for responsive navigation
-  - Layout wrapper component
-- Product pages:
-  - Product listing page with grid view
-  - Product filters (categories, price range, ratings)
-  - Individual product page with details
-  - Product gallery
-  - Product reviews section
-  - Size guide component
-  - Share product functionality
-  - Recently viewed products
-- Shopping cart:
-  - Cart context for state management
-  - Add to cart functionality
-  - Cart icon with item count
-  - Cart summary
-- Checkout process:
-  - Checkout form with validation
-  - Order summary component
-  - Thank you page
-- UI Components:
-  - Loading skeletons for better UX
-  - Responsive design for all screen sizes
-- Utility functions:
-  - Price formatting
-  - Date formatting
-  - Loading simulation
-  - Text truncation
-  - Rating calculations
-- Project configuration:
-  - Tailwind CSS setup
-  - Next.js configuration
-  - TypeScript configuration
-  - Git setup
-  - Netlify deployment configuration
-
-### Technical Improvements
-- Implemented proper TypeScript types throughout the application
-- Added error handling for product loading
-- Optimized images with Next.js Image component
-- Implemented responsive design patterns
-- Set up proper project structure
-- Added comprehensive documentation
-- Configured deployment settings for Netlify
+- Created loading skeleton components for product cards and product details
+- Implemented mobile menu for better navigation on smaller screens
+- Added cart context for managing shopping cart state
+- Implemented product filtering functionality
+- Created checkout form and order summary components
+- Added thank you page for order confirmation
+- Set up Netlify configuration for deployment
 
 ### Fixed
-- Fixed infinite update loop in ProductFilters component
-- Resolved TypeScript errors in cart context
-- Fixed image loading issues with proper Next.js configuration
-- Corrected mobile menu behavior
-- Fixed filter state management issues
+- Resolved "Maximum update depth exceeded" error in cart context
+- Fixed TypeScript errors in product page components
+- Added proper ESLint configuration
+- Fixed unescaped entities in thank you page
+- Updated Next.js configuration to handle TypeScript build errors
 
-## [Unreleased]
-- Integration with actual e-commerce API
-- User authentication
-- Admin dashboard
-- Product search functionality
-- Wishlist feature
-- Product categories management
-- User reviews and ratings system
-- Order tracking system
-- Payment gateway integration 
+### Changed
+- Improved product grid layout and responsiveness
+- Enhanced mobile menu user experience
+- Updated cart context to persist state in localStorage
+- Optimized loading states with skeleton components
+
+## [0.1.0] - 2024-01-20
+
+### Added
+- Initial project setup with Next.js and TypeScript
+- Basic project structure and components
+- TailwindCSS configuration
+- Basic routing setup
+- Product listing and detail pages
+- Shopping cart functionality
+- Checkout process
+- Basic responsive design 

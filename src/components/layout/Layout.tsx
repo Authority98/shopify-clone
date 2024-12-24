@@ -1,13 +1,9 @@
-/**
- * Layout Component
- * 
- * This component serves as the main layout wrapper for all pages.
- * It includes the Header and Footer components and wraps the main content.
- */
+'use client'
 
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import { CartProvider } from '@/lib/context/CartContext'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -15,12 +11,14 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
-        {children}
-      </main>
-      <Footer />
-    </div>
+    <CartProvider>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
+      </div>
+    </CartProvider>
   )
 } 
