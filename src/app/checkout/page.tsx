@@ -12,21 +12,26 @@ import Layout from '@/components/layout/Layout'
 import CheckoutForm from '@/components/checkout/CheckoutForm'
 import OrderSummary from '@/components/checkout/OrderSummary'
 import { useCart } from '@/lib/context/CartContext'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function CheckoutPage() {
   const { state } = useCart()
-  const router = useRouter()
-
-  // Redirect to products if cart is empty
-  React.useEffect(() => {
-    if (state.items.length === 0) {
-      router.push('/products')
-    }
-  }, [state.items.length, router])
 
   if (state.items.length === 0) {
-    return null
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-16 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
+          <p className="text-gray-600 mb-8">Add some items to your cart to proceed with checkout.</p>
+          <Link 
+            href="/products" 
+            className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition-colors"
+          >
+            Browse Products
+          </Link>
+        </div>
+      </Layout>
+    )
   }
 
   return (

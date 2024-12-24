@@ -10,6 +10,9 @@
 - Created checkout form and order summary components
 - Added thank you page for order confirmation
 - Set up Netlify configuration for deployment
+- Added proper empty cart message in checkout page
+- Added multiple product images in product gallery
+- Enhanced product gallery with zoom functionality
 
 ### Fixed
 - Resolved "Maximum update depth exceeded" error in cart context
@@ -17,12 +20,20 @@
 - Added proper ESLint configuration
 - Fixed unescaped entities in thank you page
 - Updated Next.js configuration to handle TypeScript build errors
+- Fixed cart navigation issues
+- Fixed cart state hydration issues
+- Fixed duplicate key errors in product gallery
+- Fixed async params handling in product page
+- Improved cart state persistence with localStorage
 
 ### Changed
 - Improved product grid layout and responsiveness
 - Enhanced mobile menu user experience
 - Updated cart context to persist state in localStorage
 - Optimized loading states with skeleton components
+- Improved cart state management with better hydration handling
+- Enhanced product images with unique IDs and descriptive alt text
+- Updated checkout page to show proper empty cart message
 
 ## [0.1.0] - 2024-01-20
 

@@ -13,19 +13,15 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Fetch product data if needed
-  const productId = await Promise.resolve(params.id)
-  
+export async function generateMetadata(
+  { params }: Props
+): Promise<Metadata> {
   return {
-    title: `Product ${productId} | Shopify Clone`,
+    title: `Product ${params.id} | Shopify Clone`,
     description: 'View product details and make a purchase',
   }
 }
 
-export default async function ProductPage({ params }: Props) {
-  // Resolve params asynchronously
-  const productId = await Promise.resolve(params.id)
-  
-  return <ProductPageContent productId={productId} />
+export default function ProductPage({ params }: Props) {
+  return <ProductPageContent productId={params.id} />
 } 

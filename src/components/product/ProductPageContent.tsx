@@ -7,7 +7,7 @@
 
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '@/components/layout/Layout'
 import ProductGallery from '@/components/product/ProductGallery'
 import SizeGuide from '@/components/product/SizeGuide'
@@ -22,23 +22,40 @@ interface ProductPageContentProps {
 
 // Mock product data - replace with API call
 function getProduct(id: string) {
+  const productId = parseInt(id)
   return {
-    id: parseInt(id),
+    id: productId,
     name: 'Sample Product',
     price: 99.99,
     description: 'This is a sample product description.',
-    images: [{
-      id: 1,
-      url: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b',
-      alt: 'Product Image'
-    }],
+    images: [
+      {
+        id: productId * 1000 + 1,
+        url: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b',
+        alt: 'Product Image Front View'
+      },
+      {
+        id: productId * 1000 + 2,
+        url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f',
+        alt: 'Product Image Side View'
+      },
+      {
+        id: productId * 1000 + 3,
+        url: 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3',
+        alt: 'Product Image Back View'
+      }
+    ],
     category: 'clothing'
   }
 }
 
 export default function ProductPageContent({ productId }: ProductPageContentProps) {
   const product = getProduct(productId)
-  const productUrl = typeof window !== 'undefined' ? window.location.href : ''
+  const [productUrl, setProductUrl] = useState('')
+
+  useEffect(() => {
+    setProductUrl(window.location.href)
+  }, [])
 
   return (
     <Layout>

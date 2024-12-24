@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useReducer, useEffect } from 'react'
+import React, { createContext, useContext, useReducer, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 interface CartItem {
@@ -22,6 +22,7 @@ type CartAction =
   | { type: 'REMOVE_ITEM'; payload: number }
   | { type: 'UPDATE_QUANTITY'; payload: { id: number; quantity: number } }
   | { type: 'CLEAR_CART' }
+  | { type: 'SET_CART'; payload: CartState }
 
 const initialState: CartState = {
   items: [],
@@ -100,6 +101,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         }
       }
 
+      case 'SET_CART':
+        return action.payload
+
       case 'CLEAR_CART':
         return initialState
 
@@ -123,6 +127,7 @@ const CartContext = createContext<{
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -130,26 +135,27 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const savedCart = localStorage.getItem('cart')
       if (savedCart) {
         const parsedCart = JSON.parse(savedCart)
-        dispatch({ type: 'CLEAR_CART' })
-        parsedCart.items.forEach((item: CartItem) => {
-          dispatch({ type: 'ADD_ITEM', payload: item })
-        })
+        dispatch({ type: 'SET_CART', payload: parsedCart })
       }
     } catch (error) {
       console.error('Error loading cart from localStorage:', error)
       toast.error('Failed to load cart data')
+    } finally {
+      setIsLoaded(true)
     }
   }, [])
 
   // Save cart to localStorage on changes
   useEffect(() => {
-    try {
-      localStorage.setItem('cart', JSON.stringify(state))
-    } catch (error) {
-      console.error('Error saving cart to localStorage:', error)
-      toast.error('Failed to save cart data')
+    if (isLoaded) {
+      try {
+        localStorage.setItem('cart', JSON.stringify(state))
+      } catch (error) {
+        console.error('Error saving cart to localStorage:', error)
+        toast.error('Failed to save cart data')
+      }
     }
-  }, [state])
+  }, [state, isLoaded])
 
   const removeItem = (id: number) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id })
@@ -161,6 +167,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' })
+  }
+
+  if (!isLoaded) {
+    return null
   }
 
   return (
