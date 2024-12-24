@@ -30,6 +30,8 @@
 - Fixed async params handling in product page
 - Improved cart state persistence with localStorage
 - Fixed product data structure and type definitions
+- Fixed product images to match their respective categories and descriptions
+- Fixed duplicate image usage across products
 
 ### Changed
 - Improved product grid layout and responsiveness
@@ -41,6 +43,9 @@
 - Updated checkout page to show proper empty cart message
 - Restructured product data with realistic information
 - Enhanced category navigation with proper filtering
+- Updated product images with category-specific high-quality photos
+- Improved image alt text descriptions for better accessibility
+- Enhanced product gallery with contextual and detail shots
 
 ## [0.1.0] - 2024-01-20
 

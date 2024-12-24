@@ -30,18 +30,18 @@ export const products: Product[] = [
     images: [
       {
         id: 1001,
-        url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab',
+        url: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820',
         alt: 'Classic white t-shirt front view'
       },
       {
         id: 1002,
-        url: 'https://images.unsplash.com/photo-1562157873-818bc0726f68',
-        alt: 'Classic white t-shirt detail view'
+        url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab',
+        alt: 'Classic white t-shirt on model'
       },
       {
         id: 1003,
         url: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a',
-        alt: 'Classic white t-shirt back view'
+        alt: 'Classic white t-shirt material detail'
       }
     ]
   },
@@ -55,18 +55,18 @@ export const products: Product[] = [
     images: [
       {
         id: 2001,
-        url: 'https://images.unsplash.com/photo-1542272604-787c3835535d',
+        url: 'https://images.unsplash.com/photo-1604176354204-9268737828e4',
         alt: 'Slim fit jeans front view'
       },
       {
         id: 2002,
-        url: 'https://images.unsplash.com/photo-1582552938357-32b906df40cb',
-        alt: 'Slim fit jeans detail view'
+        url: 'https://images.unsplash.com/photo-1542272604-787c3835535d',
+        alt: 'Slim fit jeans on model'
       },
       {
         id: 2003,
-        url: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246',
-        alt: 'Slim fit jeans back view'
+        url: 'https://images.unsplash.com/photo-1582552938357-32b906df40cb',
+        alt: 'Slim fit jeans detail'
       }
     ]
   },
@@ -80,18 +80,18 @@ export const products: Product[] = [
     images: [
       {
         id: 3001,
-        url: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27',
+        url: 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9',
         alt: 'Wool sweater front view'
       },
       {
         id: 3002,
         url: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a',
-        alt: 'Wool sweater detail view'
+        alt: 'Wool sweater on model'
       },
       {
         id: 3003,
         url: 'https://images.unsplash.com/photo-1584670747417-594a9412fba5',
-        alt: 'Wool sweater back view'
+        alt: 'Wool sweater texture detail'
       }
     ]
   },
@@ -108,17 +108,17 @@ export const products: Product[] = [
       {
         id: 4001,
         url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e',
-        alt: 'Wireless headphones front view'
+        alt: 'Wireless headphones product shot'
       },
       {
         id: 4002,
-        url: 'https://images.unsplash.com/photo-1484704849700-f032a568e944',
-        alt: 'Wireless headphones detail view'
+        url: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b',
+        alt: 'Wireless headphones in use'
       },
       {
         id: 4003,
-        url: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a',
-        alt: 'Wireless headphones in use'
+        url: 'https://images.unsplash.com/photo-1484704849700-f032a568e944',
+        alt: 'Wireless headphones detail view'
       }
     ]
   },
@@ -132,18 +132,18 @@ export const products: Product[] = [
     images: [
       {
         id: 5001,
-        url: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1',
+        url: 'https://images.unsplash.com/photo-1593784991095-a205069470b6',
         alt: 'Smart TV front view'
       },
       {
         id: 5002,
-        url: 'https://images.unsplash.com/photo-1593784991095-a205069470b6',
-        alt: 'Smart TV in living room'
+        url: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1',
+        alt: 'Smart TV in modern living room'
       },
       {
         id: 5003,
-        url: 'https://images.unsplash.com/photo-1593784991095-a205069470b6',
-        alt: 'Smart TV interface'
+        url: 'https://images.unsplash.com/photo-1601944177325-f8867652837f',
+        alt: 'Smart TV interface display'
       }
     ]
   },
@@ -162,13 +162,13 @@ export const products: Product[] = [
       },
       {
         id: 6002,
-        url: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c',
-        alt: 'Smartphone camera detail'
+        url: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9',
+        alt: 'Smartphone features display'
       },
       {
         id: 6003,
         url: 'https://images.unsplash.com/photo-1605236453806-6ff36851218e',
-        alt: 'Smartphone in use'
+        alt: 'Smartphone camera demo'
       }
     ]
   },
@@ -185,16 +185,16 @@ export const products: Product[] = [
       {
         id: 7001,
         url: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc',
-        alt: 'Coffee table front view'
+        alt: 'Modern coffee table in living room'
       },
       {
         id: 7002,
-        url: 'https://images.unsplash.com/photo-1554295405-abb8fd54f153',
-        alt: 'Coffee table in living room'
+        url: 'https://images.unsplash.com/photo-1567016432779-094069958ea5',
+        alt: 'Coffee table styling'
       },
       {
         id: 7003,
-        url: 'https://images.unsplash.com/photo-1532372320572-cda25653a26d',
+        url: 'https://images.unsplash.com/photo-1554295405-abb8fd54f153',
         alt: 'Coffee table detail view'
       }
     ]
@@ -210,17 +210,17 @@ export const products: Product[] = [
       {
         id: 8001,
         url: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411',
-        alt: 'Ceramic pots set'
+        alt: 'Ceramic plant pots set'
       },
       {
         id: 8002,
-        url: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09',
-        alt: 'Ceramic pots with plants'
+        url: 'https://images.unsplash.com/photo-1463320726281-696a485928c7',
+        alt: 'Plant pots with succulents'
       },
       {
         id: 8003,
-        url: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a',
-        alt: 'Ceramic pots detail'
+        url: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09',
+        alt: 'Decorative plant arrangement'
       }
     ]
   },
@@ -235,17 +235,17 @@ export const products: Product[] = [
       {
         id: 9001,
         url: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af',
-        alt: 'Bedding set on bed'
+        alt: 'Luxury bedding set display'
       },
       {
         id: 9002,
-        url: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e6',
-        alt: 'Bedding set detail'
+        url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0',
+        alt: 'Bedding in modern bedroom'
       },
       {
         id: 9003,
-        url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0',
-        alt: 'Bedding set in bedroom'
+        url: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e6',
+        alt: 'Bedding detail and texture'
       }
     ]
   }
