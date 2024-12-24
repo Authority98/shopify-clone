@@ -26,6 +26,7 @@ interface FormData {
 export default function CheckoutForm() {
   const router = useRouter()
   const { clearCart } = useCart()
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -75,6 +76,7 @@ export default function CheckoutForm() {
     }
 
     try {
+      setIsLoading(true)
       // Here you would typically send the order to your backend
       // For now, we'll just simulate a successful order
       await new Promise(resolve => setTimeout(resolve, 1000))
@@ -84,6 +86,8 @@ export default function CheckoutForm() {
     } catch (error) {
       console.error('Error processing order:', error)
       alert('There was an error processing your order. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -271,9 +275,14 @@ export default function CheckoutForm() {
       {/* Submit Button */}
       <button
         type="submit"
-        className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 transition-colors"
+        disabled={isLoading}
+        className={`w-full py-3 px-4 rounded-md transition-colors ${
+          isLoading
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-indigo-600 hover:bg-indigo-700'
+        } text-white`}
       >
-        Place Order
+        {isLoading ? 'Processing...' : 'Place Order'}
       </button>
     </form>
   )

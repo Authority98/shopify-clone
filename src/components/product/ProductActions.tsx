@@ -9,6 +9,7 @@
 
 import React, { useState } from 'react'
 import { useCart } from '@/lib/context/CartContext'
+import { toast } from 'sonner'
 
 interface ProductImage {
   id: number
@@ -35,7 +36,7 @@ export default function ProductActions({ product }: ProductActionsProps) {
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert('Please select a size')
+      toast.error('Please select a size')
       return
     }
 
@@ -49,6 +50,8 @@ export default function ProductActions({ product }: ProductActionsProps) {
         quantity: 1
       }
     })
+
+    toast.success('Added to cart!')
   }
 
   return (
