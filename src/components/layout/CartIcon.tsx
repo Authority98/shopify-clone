@@ -4,6 +4,8 @@
  * This component displays the shopping cart icon with the current number of items.
  */
 
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
 import { ShoppingCart } from 'lucide-react'
