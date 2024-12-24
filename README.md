@@ -1,30 +1,36 @@
 # Shopify Clone
 
-A modern e-commerce platform built with Next.js, TypeScript, and Tailwind CSS.
+A modern e-commerce platform built with Next.js, TypeScript, and Tailwind CSS. View the live demo [here](https://shopify-clone-next.netlify.app).
 
 ## Features
 
-- 🛍️ Product listing with filters
-- 🔍 Product search and filtering
-- 🛒 Shopping cart functionality
+- 🛍️ Product listing with category filters
+- 🔍 Product search functionality
+- 🛒 Shopping cart with persistent storage
 - 📱 Responsive design with mobile menu
 - ⚡ Fast page loads with Next.js
-- 💳 Checkout process
+- 💳 Streamlined checkout process
 - 🎨 Modern UI with Tailwind CSS
+- 🖼️ Product gallery with zoom functionality
+- 🔄 Real-time cart updates
+- 📦 Multiple product images
+- 🎯 Category-based navigation
+- 💫 Loading states and animations
 
 ## Tech Stack
 
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- Headless UI
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
 - React Context for state management
+- Local Storage for cart persistence
+- Unsplash for high-quality images
 
 ## Getting Started
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Authority98/shopify-clone.git
 cd shopify-clone
 ```
 
@@ -39,6 +45,22 @@ npm run dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+src/
+├── app/                 # Next.js app router pages
+├── components/         # React components
+│   ├── layout/        # Layout components
+│   ├── product/       # Product-related components
+│   ├── checkout/      # Checkout components
+│   └── ui/            # Reusable UI components
+├── lib/               # Utilities and helpers
+│   ├── context/       # React context providers
+│   └── data/          # Mock data and types
+└── styles/            # Global styles
+```
 
 ## Deployment
 
@@ -57,10 +79,31 @@ npm run dev
 
 No environment variables are required for basic functionality.
 
+## Features in Detail
+
+- **Product Catalog**: Browse products by category with detailed product pages
+- **Shopping Cart**: Add/remove items, update quantities, persistent cart state
+- **Search**: Search products by name and description
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
+- **Image Gallery**: Multiple product images with zoom functionality
+- **Category Filters**: Filter products by category
+- **Loading States**: Skeleton loading states for better UX
+- **Error Handling**: Proper error handling and user feedback
+
 ## Contributing
 
-Feel free to submit issues and pull requests.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Images from [Unsplash](https://unsplash.com)
+- Icons from [Lucide](https://lucide.dev)
+- UI inspiration from [Shopify](https://shopify.com)
