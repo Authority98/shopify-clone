@@ -1,101 +1,126 @@
-import Image from "next/image";
+/**
+ * Home Page
+ * 
+ * The main landing page of the e-commerce site.
+ * Features hero section, featured products, and category highlights.
+ */
 
-export default function Home() {
+'use client'
+
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import Layout from '@/components/layout/Layout'
+import ProductGrid from '@/components/product/ProductGrid'
+
+// Mock featured products
+const featuredProducts = [
+  {
+    id: 1,
+    name: 'Basic Tee',
+    price: 35,
+    rating: 4.5,
+    image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b',
+    category: 'clothing',
+  },
+  {
+    id: 2,
+    name: 'Wireless Earbuds',
+    price: 129,
+    rating: 4.2,
+    image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df',
+    category: 'electronics',
+  },
+  {
+    id: 3,
+    name: 'Best-Selling Novel',
+    price: 19,
+    rating: 4.8,
+    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f',
+    category: 'books',
+  },
+]
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <Layout>
+      {/* Hero Section */}
+      <div className="relative h-[70vh] bg-gray-900">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8"
+          alt="Hero Image"
+          fill
+          className="object-cover opacity-50"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              Welcome to ShopifyClone
+            </h1>
+            <p className="text-xl md:text-2xl mb-8">
+              Discover amazing products at great prices
+            </p>
+            <Link
+              href="/products"
+              className="bg-white text-gray-900 px-8 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors"
+            >
+              Shop Now
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </div>
+
+      {/* Featured Categories */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">Shop by Category</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'Electronics',
+                image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661',
+                href: '/products?category=electronics'
+              },
+              {
+                name: 'Clothing',
+                image: 'https://images.unsplash.com/photo-1445205170230-053b83016050',
+                href: '/products?category=clothing'
+              },
+              {
+                name: 'Home & Garden',
+                image: 'https://images.unsplash.com/photo-1484101403633-562f891dc89a',
+                href: '/products?category=home'
+              }
+            ].map((category) => (
+              <Link
+                key={category.name}
+                href={category.href}
+                className="group relative h-64 rounded-lg overflow-hidden"
+              >
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-200"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all">
+                  <div className="absolute bottom-6 left-6">
+                    <h3 className="text-xl font-semibold text-white">{category.name}</h3>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Products</h2>
+          <ProductGrid products={featuredProducts} />
+        </div>
+      </section>
+    </Layout>
+  )
 }
