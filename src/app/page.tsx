@@ -12,36 +12,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '@/components/layout/Layout'
 import ProductGrid from '@/components/product/ProductGrid'
-
-// Mock featured products
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Basic Tee',
-    price: 35,
-    rating: 4.5,
-    image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b',
-    category: 'clothing',
-  },
-  {
-    id: 2,
-    name: 'Wireless Earbuds',
-    price: 129,
-    rating: 4.2,
-    image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df',
-    category: 'electronics',
-  },
-  {
-    id: 3,
-    name: 'Best-Selling Novel',
-    price: 19,
-    rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f',
-    category: 'books',
-  },
-]
+import { getFeaturedProducts } from '@/lib/data/products'
 
 export default function HomePage() {
+  const featuredProducts = getFeaturedProducts()
+
   return (
     <Layout>
       {/* Hero Section */}

@@ -12,15 +12,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Star } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
-
-interface Product {
-  id: number
-  name: string
-  price: number
-  rating: number
-  image: string
-  category: string
-}
+import { Product } from '@/lib/data/products'
 
 interface ProductGridProps {
   products: Product[]
@@ -47,8 +39,8 @@ export default function ProductGrid({ products }: ProductGridProps) {
             {/* Product Image */}
             <div className="relative h-64 w-full">
               <Image
-                src={product.image}
-                alt={product.name}
+                src={product.images[0].url}
+                alt={product.images[0].alt}
                 fill
                 className="object-cover"
               />
