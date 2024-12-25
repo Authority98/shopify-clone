@@ -20,19 +20,38 @@ interface RecentProduct extends Product {
   viewedAt: number
 }
 
+interface ProductImage {
+  id: number
+  url: string
+  alt: string
+}
+
+interface OldProductFormat {
+  id: number
+  name: string
+  price: number
+  description?: string
+  category: string
+  rating: number
+  image?: string
+  viewedAt?: number
+}
+
 // Helper function to validate product data structure
-function isValidProduct(product: any): product is RecentProduct {
+function isValidProduct(product: unknown): product is RecentProduct {
+  if (!product || typeof product !== 'object') return false
+  
+  const p = product as Partial<RecentProduct>
   return (
-    product &&
-    typeof product.id === 'number' &&
-    typeof product.name === 'string' &&
-    typeof product.price === 'number' &&
-    typeof product.description === 'string' &&
-    typeof product.category === 'string' &&
-    typeof product.rating === 'number' &&
-    Array.isArray(product.images) &&
-    product.images.length > 0 &&
-    product.images.every((img: any) => 
+    typeof p.id === 'number' &&
+    typeof p.name === 'string' &&
+    typeof p.price === 'number' &&
+    typeof p.description === 'string' &&
+    typeof p.category === 'string' &&
+    typeof p.rating === 'number' &&
+    Array.isArray(p.images) &&
+    p.images.length > 0 &&
+    p.images.every((img: ProductImage) => 
       typeof img.id === 'number' &&
       typeof img.url === 'string' &&
       typeof img.alt === 'string'
@@ -41,7 +60,7 @@ function isValidProduct(product: any): product is RecentProduct {
 }
 
 // Helper function to migrate old product data structure
-function migrateProduct(oldProduct: any, index: number): RecentProduct | null {
+function migrateProduct(oldProduct: OldProductFormat | RecentProduct, index: number): RecentProduct | null {
   try {
     // Add timestamp if it's missing
     const baseTimestamp = Date.now()
@@ -65,7 +84,7 @@ function migrateProduct(oldProduct: any, index: number): RecentProduct | null {
           alt: oldProduct.name
         }],
         viewedAt: oldProduct.viewedAt || viewedAt
-      }
+      } as RecentProduct
     }
 
     return null
