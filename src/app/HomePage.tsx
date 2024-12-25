@@ -1,15 +1,8 @@
 /**
- * Home Page Route (/)
+ * Home Page
  * 
- * This is the main landing page of the e-commerce site.
- * The file must be named 'page.tsx' for Next.js App Router.
- * 
- * Route: /
- * Layout: RootLayout
- * Components:
- * - Hero section with featured image
- * - Featured categories grid
- * - Featured products section
+ * The main landing page of the e-commerce site.
+ * Features hero section, featured products, and category highlights.
  */
 
 'use client'
@@ -105,4 +98,4 @@ export default function HomePage() {
       </section>
     </Layout>
   )
-} 
+}

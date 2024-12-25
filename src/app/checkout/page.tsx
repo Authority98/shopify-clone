@@ -1,8 +1,19 @@
 /**
- * Checkout Page
+ * Checkout Route (/checkout)
  * 
- * This page handles the checkout process including shipping information,
- * payment details, and order summary.
+ * This page handles the checkout process for the shopping cart.
+ * The file must be named 'page.tsx' for Next.js App Router.
+ * 
+ * Route: /checkout
+ * Layout: RootLayout
+ * State:
+ * - Uses CartContext for cart state
+ * - Redirects to products if cart is empty
+ * 
+ * Components:
+ * - CheckoutForm: Form for shipping and payment info
+ * - OrderSummary: Displays cart items and total
+ * - Layout: Page layout with header and footer
  */
 
 'use client'

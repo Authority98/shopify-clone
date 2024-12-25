@@ -1,18 +1,7 @@
 /**
- * Products List Route (/products)
+ * Products Page
  * 
- * This page displays the product catalog with filtering and search capabilities.
- * The file must be named 'page.tsx' for Next.js App Router.
- * 
- * Route: /products
- * Layout: RootLayout
- * Query Parameters:
- * - category: Filter products by category
- * - search: Filter products by search term
- * 
- * Components:
- * - ProductGrid: Displays the grid of product cards
- * - ProductGridSkeleton: Loading state for product grid
+ * Displays a grid of products with filtering options.
  */
 
 'use client'

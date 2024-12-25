@@ -1,8 +1,18 @@
 /**
- * Thank You Page
+ * Thank You Route (/thank-you)
  * 
- * Displayed after successful checkout, shows order confirmation
- * and next steps.
+ * This page is shown after a successful checkout.
+ * The file must be named 'page.tsx' for Next.js App Router.
+ * 
+ * Route: /thank-you
+ * Layout: RootLayout
+ * Features:
+ * - Order confirmation message
+ * - Next steps information
+ * - Link to continue shopping
+ * 
+ * Components:
+ * - Layout: Page layout with header and footer
  */
 
 'use client'

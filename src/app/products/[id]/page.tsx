@@ -1,7 +1,18 @@
 /**
- * Product Detail Page
+ * Product Detail Route (/products/[id])
  * 
- * Server component that renders the product page content.
+ * This page displays detailed information about a specific product.
+ * The file must be named 'page.tsx' for Next.js App Router.
+ * The [id] in the folder name is a dynamic route parameter.
+ * 
+ * Route: /products/[id]
+ * Layout: RootLayout
+ * Parameters:
+ * - id: Product ID from the URL
+ * 
+ * Components:
+ * - ProductPageContent: Main product display component
+ * - Layout: Page layout with header and footer
  */
 
 import React from 'react'
