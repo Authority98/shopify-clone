@@ -24,17 +24,17 @@ import { getFeaturedProducts } from '@/lib/data/products'
 const categories = [
   {
     name: 'Electronics',
-    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661',
+    image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=800&q=80',
     href: '/products?category=electronics'
   },
   {
     name: 'Clothing',
-    image: 'https://images.unsplash.com/photo-1445205170230-053b83016050',
+    image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80',
     href: '/products?category=clothing'
   },
   {
     name: 'Home & Garden',
-    image: 'https://images.unsplash.com/photo-1484101403633-562f891dc89a',
+    image: 'https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=800&q=80',
     href: '/products?category=home'
   }
 ]
@@ -49,7 +49,7 @@ export default function HomePage() {
         subtitle="Discover amazing products at great prices"
         ctaText="Shop Now"
         ctaLink="/products"
-        backgroundImage="https://images.unsplash.com/photo-1441986300917-64674bd600d8"
+        backgroundImage="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80"
       />
 
       <CategoryGrid
