@@ -24,6 +24,7 @@
   - Home page: HeroSection, CategoryGrid, FeaturedSection
   - Products page: ProductsHeader, ProductFilters
   - Checkout page: EmptyCartMessage, CheckoutHeader
+- Added auto-search with debounce for better user experience
 
 ### Fixed
 - Resolved "Maximum update depth exceeded" error in cart context
@@ -66,6 +67,7 @@
 - Refactored page components into smaller, reusable components
 - Improved component documentation and TypeScript types
 - Enhanced code organization with better component structure
+- Enhanced search functionality with automatic debounced search
 
 ## [0.1.0] - 2024-01-20
 

@@ -3,13 +3,15 @@
  * 
  * Provides category and search filtering for products.
  * Uses URL parameters to maintain filter state.
+ * Features auto-search with debounce.
  */
 
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Search } from 'lucide-react'
+import debounce from 'lodash/debounce'
 
 const categories = [
   { id: 'all', name: 'All Products', href: '/products' },
@@ -24,13 +26,30 @@ export default function ProductFilters() {
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
   const currentCategory = searchParams.get('category')
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (searchQuery.trim()) {
-      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
-    } else {
-      router.push('/products')
+  // Debounced search function
+  const debouncedSearch = useCallback(
+    debounce((query: string) => {
+      if (query.trim()) {
+        router.push(`/products?search=${encodeURIComponent(query.trim())}`)
+      } else {
+        router.push('/products')
+      }
+    }, 300), // 300ms delay
+    [router]
+  )
+
+  // Cleanup debounce on unmount
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel()
     }
+  }, [debouncedSearch])
+
+  // Handle search input change
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value
+    setSearchQuery(query)
+    debouncedSearch(query)
   }
 
   return (
@@ -54,22 +73,16 @@ export default function ProductFilters() {
       </div>
 
       {/* Search Bar */}
-      <form onSubmit={handleSearch} className="relative">
+      <div className="relative">
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleSearchChange}
           placeholder="Search products..."
           className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         />
         <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-        <button
-          type="submit"
-          className="absolute right-2 top-2 px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700"
-        >
-          Search
-        </button>
-      </form>
+      </div>
     </div>
   )
 } 
