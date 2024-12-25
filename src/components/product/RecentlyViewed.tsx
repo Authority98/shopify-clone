@@ -12,20 +12,71 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Star } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
-
-interface Product {
-  id: number
-  name: string
-  price: number
-  rating: number
-  image: string
-  category: string
-}
+import { Product } from '@/lib/data/products'
 
 const MAX_RECENT_PRODUCTS = 4
 
+interface RecentProduct extends Product {
+  viewedAt: number
+}
+
+// Helper function to validate product data structure
+function isValidProduct(product: any): product is RecentProduct {
+  return (
+    product &&
+    typeof product.id === 'number' &&
+    typeof product.name === 'string' &&
+    typeof product.price === 'number' &&
+    typeof product.description === 'string' &&
+    typeof product.category === 'string' &&
+    typeof product.rating === 'number' &&
+    Array.isArray(product.images) &&
+    product.images.length > 0 &&
+    product.images.every((img: any) => 
+      typeof img.id === 'number' &&
+      typeof img.url === 'string' &&
+      typeof img.alt === 'string'
+    )
+  )
+}
+
+// Helper function to migrate old product data structure
+function migrateProduct(oldProduct: any, index: number): RecentProduct | null {
+  try {
+    // Add timestamp if it's missing
+    const baseTimestamp = Date.now()
+    const viewedAt = baseTimestamp - (index * 1000) // Ensure different timestamps
+
+    if (isValidProduct(oldProduct)) {
+      return {
+        ...oldProduct,
+        viewedAt: oldProduct.viewedAt || viewedAt
+      }
+    }
+
+    // If it's the old format with a single image
+    if (oldProduct && oldProduct.image) {
+      return {
+        ...oldProduct,
+        description: oldProduct.description || 'No description available',
+        images: [{
+          id: oldProduct.id * 1000,
+          url: oldProduct.image,
+          alt: oldProduct.name
+        }],
+        viewedAt: oldProduct.viewedAt || viewedAt
+      }
+    }
+
+    return null
+  } catch (error) {
+    console.error('Error migrating product:', error)
+    return null
+  }
+}
+
 export default function RecentlyViewed() {
-  const [recentProducts, setRecentProducts] = useState<Product[]>([])
+  const [recentProducts, setRecentProducts] = useState<RecentProduct[]>([])
 
   useEffect(() => {
     // Load recently viewed products from localStorage
@@ -33,10 +84,22 @@ export default function RecentlyViewed() {
       const saved = localStorage.getItem('recentlyViewed')
       if (saved) {
         try {
-          const products = JSON.parse(saved)
-          setRecentProducts(products)
+          const parsedData = JSON.parse(saved)
+          const validProducts = (Array.isArray(parsedData) ? parsedData : [])
+            .map((product, index) => migrateProduct(product, index))
+            .filter((p): p is RecentProduct => p !== null)
+            .sort((a, b) => b.viewedAt - a.viewedAt) // Sort by timestamp
+          
+          setRecentProducts(validProducts)
+
+          // Save back the migrated data
+          if (validProducts.length > 0) {
+            localStorage.setItem('recentlyViewed', JSON.stringify(validProducts))
+          }
         } catch (err) {
           console.error('Failed to parse recently viewed products:', err)
+          // Clear invalid data
+          localStorage.removeItem('recentlyViewed')
         }
       }
     }
@@ -54,9 +117,9 @@ export default function RecentlyViewed() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {recentProducts.map((product) => (
+          {recentProducts.map((product, index) => (
             <Link
-              key={product.id}
+              key={`recent-${product.id}-${product.viewedAt}-${index}`}
               href={`/products/${product.id}`}
               className="group"
             >
@@ -64,8 +127,8 @@ export default function RecentlyViewed() {
                 {/* Product Image */}
                 <div className="relative h-64 w-full">
                   <Image
-                    src={product.image}
-                    alt={product.name}
+                    src={product.images[0].url}
+                    alt={product.images[0].alt}
                     fill
                     className="object-cover"
                   />
@@ -106,15 +169,30 @@ export default function RecentlyViewed() {
 
 // Helper function to add a product to recently viewed
 export function addToRecentlyViewed(product: Product) {
+  if (!isValidProduct(product)) {
+    console.error('Invalid product data:', product)
+    return
+  }
+
   try {
     const saved = localStorage.getItem('recentlyViewed')
-    let recentProducts: Product[] = saved ? JSON.parse(saved) : []
+    let recentProducts: RecentProduct[] = []
+
+    if (saved) {
+      const parsedData = JSON.parse(saved)
+      recentProducts = (Array.isArray(parsedData) ? parsedData : [])
+        .map((p, index) => migrateProduct(p, index))
+        .filter((p): p is RecentProduct => p !== null)
+    }
 
     // Remove the product if it already exists
     recentProducts = recentProducts.filter((p) => p.id !== product.id)
 
-    // Add the new product to the beginning
-    recentProducts.unshift(product)
+    // Add the new product to the beginning with timestamp
+    recentProducts.unshift({
+      ...product,
+      viewedAt: Date.now()
+    })
 
     // Keep only the most recent products
     recentProducts = recentProducts.slice(0, MAX_RECENT_PRODUCTS)

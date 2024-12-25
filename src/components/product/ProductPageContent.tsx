@@ -15,42 +15,13 @@ import ShareProduct from '@/components/product/ShareProduct'
 import ProductReviews from '@/components/product/ProductReviews'
 import RecentlyViewed from '@/components/product/RecentlyViewed'
 import ProductActions from '@/components/product/ProductActions'
+import { Product } from '@/lib/data/products'
 
 interface ProductPageContentProps {
-  productId: string
+  product: Product
 }
 
-// Mock product data - replace with API call
-function getProduct(id: string) {
-  const productId = parseInt(id)
-  return {
-    id: productId,
-    name: 'Sample Product',
-    price: 99.99,
-    description: 'This is a sample product description.',
-    images: [
-      {
-        id: productId * 1000 + 1,
-        url: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b',
-        alt: 'Product Image Front View'
-      },
-      {
-        id: productId * 1000 + 2,
-        url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f',
-        alt: 'Product Image Side View'
-      },
-      {
-        id: productId * 1000 + 3,
-        url: 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3',
-        alt: 'Product Image Back View'
-      }
-    ],
-    category: 'clothing'
-  }
-}
-
-export default function ProductPageContent({ productId }: ProductPageContentProps) {
-  const product = getProduct(productId)
+export default function ProductPageContent({ product }: ProductPageContentProps) {
   const [productUrl, setProductUrl] = useState('')
 
   useEffect(() => {
@@ -99,7 +70,7 @@ export default function ProductPageContent({ productId }: ProductPageContentProp
         <div className="mt-16">
           <ProductReviews 
             reviews={[]}
-            averageRating={0}
+            averageRating={product.rating}
             totalReviews={0}
           />
         </div>
