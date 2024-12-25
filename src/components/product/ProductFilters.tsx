@@ -1,158 +1,75 @@
 /**
  * ProductFilters Component
  * 
- * This component provides filtering options for products including
- * categories, price range, ratings, and other relevant filters.
+ * Provides category and search filtering for products.
+ * Uses URL parameters to maintain filter state.
  */
 
 'use client'
 
 import React, { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { Search } from 'lucide-react'
 
-interface ProductFiltersProps {
-  onFilterChange: (filters: FilterState) => void
-}
+const categories = [
+  { id: 'all', name: 'All Products', href: '/products' },
+  { id: 'electronics', name: 'Electronics', href: '/products?category=electronics' },
+  { id: 'clothing', name: 'Clothing', href: '/products?category=clothing' },
+  { id: 'home', name: 'Home & Garden', href: '/products?category=home' }
+]
 
-export interface FilterState {
-  categories: string[]
-  priceRange: [number, number]
-  ratings: number[]
-}
+export default function ProductFilters() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
+  const currentCategory = searchParams.get('category')
 
-const initialFilters: FilterState = {
-  categories: [],
-  priceRange: [0, 1000],
-  ratings: [],
-}
-
-export default function ProductFilters({ onFilterChange }: ProductFiltersProps) {
-  const [filters, setFilters] = useState<FilterState>(initialFilters)
-
-  const categories = [
-    { id: 'electronics', name: 'Electronics' },
-    { id: 'clothing', name: 'Clothing' },
-    { id: 'books', name: 'Books' },
-    { id: 'home', name: 'Home & Garden' },
-  ]
-
-  const handleCategoryChange = (categoryId: string, checked: boolean) => {
-    const newFilters: FilterState = {
-      ...filters,
-      categories: checked
-        ? [...filters.categories, categoryId]
-        : filters.categories.filter(id => id !== categoryId)
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
+    } else {
+      router.push('/products')
     }
-    setFilters(newFilters)
-    onFilterChange(newFilters)
-  }
-
-  const handlePriceChange = (index: number, value: number) => {
-    const newPriceRange: [number, number] = index === 0
-      ? [value, filters.priceRange[1]]
-      : [filters.priceRange[0], value]
-
-    const newFilters: FilterState = {
-      ...filters,
-      priceRange: newPriceRange
-    }
-    setFilters(newFilters)
-    onFilterChange(newFilters)
-  }
-
-  const handleRatingChange = (rating: number, checked: boolean) => {
-    const newFilters: FilterState = {
-      ...filters,
-      ratings: checked
-        ? [...filters.ratings, rating]
-        : filters.ratings.filter(r => r !== rating)
-    }
-    setFilters(newFilters)
-    onFilterChange(newFilters)
-  }
-
-  const handleReset = () => {
-    setFilters(initialFilters)
-    onFilterChange(initialFilters)
   }
 
   return (
-    <div className="space-y-6">
-      {/* Categories */}
-      <div>
-        <h3 className="text-lg font-medium text-gray-900">Categories</h3>
-        <div className="mt-4 space-y-4">
-          {categories.map((category) => (
-            <div key={category.id} className="flex items-center">
-              <input
-                id={category.id}
-                name="category"
-                type="checkbox"
-                checked={filters.categories.includes(category.id)}
-                onChange={(e) => handleCategoryChange(category.id, e.target.checked)}
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              />
-              <label htmlFor={category.id} className="ml-3 text-sm text-gray-600">
-                {category.name}
-              </label>
-            </div>
-          ))}
-        </div>
+    <div className="mb-8">
+      {/* Category Filters */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {categories.map((category) => (
+          <a
+            key={category.id}
+            href={category.href}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              (category.id === 'all' && !currentCategory) ||
+              category.id === currentCategory
+                ? 'bg-gray-900 text-white'
+                : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+            }`}
+          >
+            {category.name}
+          </a>
+        ))}
       </div>
 
-      {/* Price Range */}
-      <div>
-        <h3 className="text-lg font-medium text-gray-900">Price Range</h3>
-        <div className="mt-4">
-          <div className="flex items-center space-x-4">
-            <input
-              type="number"
-              value={filters.priceRange[0]}
-              onChange={(e) => handlePriceChange(0, parseInt(e.target.value))}
-              className="w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              min="0"
-            />
-            <span>to</span>
-            <input
-              type="number"
-              value={filters.priceRange[1]}
-              onChange={(e) => handlePriceChange(1, parseInt(e.target.value))}
-              className="w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              min="0"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Ratings */}
-      <div>
-        <h3 className="text-lg font-medium text-gray-900">Rating</h3>
-        <div className="mt-4 space-y-4">
-          {[4, 3, 2, 1].map((rating) => (
-            <div key={rating} className="flex items-center">
-              <input
-                id={`rating-${rating}`}
-                name="rating"
-                type="checkbox"
-                checked={filters.ratings.includes(rating)}
-                onChange={(e) => handleRatingChange(rating, e.target.checked)}
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              />
-              <label htmlFor={`rating-${rating}`} className="ml-3 text-sm text-gray-600">
-                {rating}+ Stars
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Reset Filters Button */}
-      <button
-        type="button"
-        onClick={handleReset}
-        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors"
-      >
-        Reset Filters
-      </button>
+      {/* Search Bar */}
+      <form onSubmit={handleSearch} className="relative">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search products..."
+          className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+        />
+        <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+        <button
+          type="submit"
+          className="absolute right-2 top-2 px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700"
+        >
+          Search
+        </button>
+      </form>
     </div>
   )
 } 

@@ -11,8 +11,10 @@
  * - search: Filter products by search term
  * 
  * Components:
- * - ProductGrid: Displays the grid of product cards
- * - ProductGridSkeleton: Loading state for product grid
+ * - ProductsHeader: Title and product count
+ * - ProductFilters: Category and search filters
+ * - ProductGrid: Product cards display
+ * - ProductGridSkeleton: Loading state
  */
 
 'use client'
@@ -21,6 +23,8 @@ import React, { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Layout from '@/components/layout/Layout'
 import ProductGrid from '@/components/product/ProductGrid'
+import ProductsHeader from '@/components/product/ProductsHeader'
+import ProductFilters from '@/components/product/ProductFilters'
 import { ProductGridSkeleton } from '@/components/ui/Skeleton'
 import { products, getProductsByCategory, searchProducts } from '@/lib/data/products'
 
@@ -50,22 +54,14 @@ export default function ProductsPage() {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        {/* Page Title */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            {category 
-              ? `${category.charAt(0).toUpperCase() + category.slice(1)}`
-              : searchQuery
-                ? `Search Results for "${searchQuery}"`
-                : 'All Products'
-            }
-          </h1>
-          <p className="mt-2 text-gray-600">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} available
-          </p>
-        </div>
+        <ProductsHeader
+          category={category}
+          searchQuery={searchQuery}
+          productCount={filteredProducts.length}
+        />
 
-        {/* Product Grid */}
+        <ProductFilters />
+
         {loading ? (
           <ProductGridSkeleton />
         ) : (
